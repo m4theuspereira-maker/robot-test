@@ -1,5 +1,5 @@
-import { Table } from "../../src/domain/table/table";
-import { ForeignPositionError } from "../../src/domain/table/tableErros";
+import { Table } from "../../../src/domain/table/table";
+import { ForeignPositionError } from "../../../src/domain/table/tableErros";
 
 describe("table test", () => {
   let table: Table;
