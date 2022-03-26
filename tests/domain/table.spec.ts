@@ -11,4 +11,10 @@ describe("table test", () => {
       table.validateRobotPosition([-6, 4]);
     }).toThrowError(new ForeignPositionError());
   });
+
+  it("should return true for a valid position", () => {
+    const tableValidPosition = table.validateRobotPosition([0, 4]);
+
+    expect(tableValidPosition).toEqual(true);
+  });
 });
