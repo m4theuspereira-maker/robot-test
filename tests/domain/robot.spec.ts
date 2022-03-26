@@ -21,4 +21,13 @@ describe("robot", () => {
       robot.placeRobot("northhh", [0, 0]);
     }).toThrowError(new DirectionError());
   });
+
+  it("should return the robot position", () => {
+    const robotPosition = robot.placeRobot("north", [0, 0]);
+
+    expect(robotPosition).toEqual({
+      initialDirection: "north",
+      position: [0, 0],
+    });
+  });
 });
