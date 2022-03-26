@@ -99,4 +99,46 @@ export class TableService {
     }
     return direction;
   }
+
+  moveRobot(position: number[], direction: string): number[] {
+    try {
+      const robotDirectionUpperCase = direction.toUpperCase().trim();
+
+      let positionX = position[0];
+      let positionY = position[1];
+
+      const isInvalidDirection = !initialDirections.includes(
+        robotDirectionUpperCase
+      );
+
+      if (isInvalidDirection) {
+        throw new DirectionError();
+      }
+
+      switch (robotDirectionUpperCase) {
+        case directions.NORTH:
+          positionY = -1;
+          break;
+        case directions.WEST:
+          positionX = -1;
+          break;
+        case directions.SOUTH:
+          positionY = +1;
+          break;
+        case directions.EAST:
+          positionX = +1;
+          break;
+        default:
+          break;
+      }
+
+      const newPosition = [positionX, positionY];
+
+      this.table.validateRobotPosition(newPosition);
+
+      return newPosition;
+    } catch (error) {
+      throw new ForeignPositionError();
+    }
+  }
 }

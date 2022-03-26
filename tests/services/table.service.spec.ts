@@ -1,7 +1,6 @@
 import { Robot } from "../../src/domain/robot/robot";
 import { Table } from "../../src/domain/table/table";
 import { ForeignPositionError } from "../../src/domain/table/tableErros";
-import { directions, initialDirections } from "../../src/domain/robot/robot";
 import { DirectionError } from "../../src/domain/robot/robotErros";
 import { TableService } from "../../src/services/table-service/table.service";
 
@@ -53,5 +52,11 @@ describe("test table service", () => {
     const robotPosition = tableService.reportPosition([0, 1], "WEST");
 
     expect(robotPosition).toBe("0,1,WEST");
+  });
+
+  it("should throw an error if moved to an invalid position", () => {
+    expect(() => tableService.moveRobot([0, 0], "north")).toThrowError(
+      new ForeignPositionError()
+    );
   });
 });
