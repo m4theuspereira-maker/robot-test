@@ -48,4 +48,10 @@ describe("test table service", () => {
 
     expect(eastDirection).toEqual("WEST");
   });
+
+  it("should return a text repoting robot location on table", () => {
+    const robotPosition = tableService.reportPosition([0, 1], "WEST");
+
+    expect(robotPosition).toBe("0,1,WEST");
+  });
 });

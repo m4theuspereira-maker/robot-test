@@ -32,8 +32,8 @@ export class TableService {
     }
   }
 
-  reportPosition(): string {
-    return "string";
+  reportPosition(position: number[], direction: string): string {
+    return `${position[0]},${position[1]},${direction}`.toUpperCase().trim();
   }
 
   turnRobotToRight(robotDirection: string): string {
@@ -90,7 +90,7 @@ export class TableService {
         break;
       case directions.SOUTH:
         direction = directions.EAST;
-        break
+        break;
       case directions.EAST:
         direction = directions.NORTH;
         break;
