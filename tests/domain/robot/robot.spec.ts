@@ -1,8 +1,8 @@
-import { Robot } from "./robot";
+import { Robot } from "../../../src/domain/robot/robot";
 import {
   DirectionError,
   PositionError,
-} from "./robotErros";
+} from "../../../src/domain/robot/robotErros";
 
 describe("robot", () => {
   let robot: Robot;
