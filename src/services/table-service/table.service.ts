@@ -117,16 +117,16 @@ export class TableService {
 
       switch (robotDirectionUpperCase) {
         case directions.NORTH:
-          positionY = -1;
+          positionY -= 1;
           break;
         case directions.WEST:
-          positionX = -1;
+          positionX -= 1;
           break;
         case directions.SOUTH:
-          positionY = +1;
+          positionY += 1;
           break;
         case directions.EAST:
-          positionX = +1;
+          positionX += 1;
           break;
         default:
           break;
