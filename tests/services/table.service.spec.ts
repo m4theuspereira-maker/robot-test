@@ -1,6 +1,9 @@
 import { Robot } from "../../src/domain/robot/robot";
 import { Table } from "../../src/domain/table/table";
 import { ForeignPositionError } from "../../src/domain/table/tableErros";
+import { directions, initialDirections } from "../../src/domain/robot/robot";
+import { DirectionError } from "../../src/domain/robot/robotErros";
+import { TableService } from "../../src/services/table-service/table.service";
 
 describe("test table service", () => {
   const table = new Table();
@@ -23,32 +26,26 @@ describe("test table service", () => {
       tableService.placeRobotInTable("south", [0, -2]);
     }).toThrowError(new ForeignPositionError());
   });
+
+  it("should throws error if invalid direction", () => {
+    expect(() => {
+      tableService.turnRobotToLeft("noth");
+    }).toThrowError(new DirectionError());
+
+    expect(() => {
+      tableService.turnRobotToRight("noth");
+    }).toThrowError(new DirectionError());
+  });
+
+  it("should return east direction when north is imput", () => {
+    const eastDirection = tableService.turnRobotToRight("north");
+
+    expect(eastDirection).toEqual("EAST");
+  });
+
+  it("should return west direction when north is imput", () => {
+    const eastDirection = tableService.turnRobotToLeft("NortH");
+
+    expect(eastDirection).toEqual("WEST");
+  });
 });
-
-class TableService {
-  constructor(private readonly table: Table, private readonly robot: Robot) {}
-
-  placeRobotInTable(direction: string, tablePosition: number[]) {
-    try {
-      const { initialDirection, position } = this.robot.placeRobot(
-        direction,
-        tablePosition
-      );
-
-      const isValidPlace = this.table.validateRobotPosition(position);
-
-      if (isValidPlace) {
-        return {
-          initialDirection,
-          position,
-        };
-      }
-    } catch (error: any) {
-      throw new ForeignPositionError();
-    }
-  }
-
-  reportPosition(): string {
-    return "string";
-  }
-}
