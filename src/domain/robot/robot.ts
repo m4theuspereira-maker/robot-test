@@ -2,6 +2,13 @@ import { PositionError, DirectionError } from "./robotErros";
 
 export const initialDirections = ["NORTH", "SOUTH", "EAST", "WEST"];
 
+export const directions = {
+  NORTH: "NORTH",
+  SOUTH: "SOUTH",
+  EAST: "EAST",
+  WEST: "WEST"
+};
+
 export interface IMovimentDirection {
   RIGHT: "RIGHT";
   LEFT: "LEFT";
