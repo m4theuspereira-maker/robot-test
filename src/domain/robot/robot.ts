@@ -12,7 +12,9 @@ export const directions = {
 export const allowedCommands = {
   PLACE: "PLACE",
   MOVE: "MOVE",
-  REPORT: "REPORT"
+  REPORT: "REPORT",
+  RIGHT: "RIGHT",
+  LEFT: "LEFT"
 };
 
 export interface IMovimentDirection {
