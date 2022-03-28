@@ -1,61 +1,137 @@
 import inquirer from "inquirer";
+import { isEmpty } from "lodash";
+import { InvalidCommandError } from "../../domain/cli/cli.erros";
+import { allowedCommands, Robot } from "../../domain/robot/robot";
+import { Table } from "../../domain/table/table";
+import { TableService } from "../table-service/table.service";
+import { PlaceRobotCliServcie } from "./place-robot.cli.servide";
 
-let positionX = 0;
-let positionY = 0;
+const table = new Table();
+const robot = new Robot();
+const tableService = new TableService(table, robot);
 
+export interface IanswerDto {
+  initialDirection: string;
+  position: number[];
+  moviment: string;
+}
+
+export const promptConfig = [
+  {
+    type: "input",
+    name: "position",
+    message: "Place the robot",
+    default: "place 0,0 north"
+  },
+  {
+    type: "input",
+    name: "moviment",
+    message: "Move robot to right, left, ahead, report the current position ",
+    default: "move"
+  }
+];
+
+const placeRobotCliServce = new PlaceRobotCliServcie(
+  table,
+  robot,
+  tableService
+);
 async function initialCLI(): Promise<any> {
-  const result = await inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "position",
-        message: "Place the robot",
-        default: [0, 0]
-      }
-    ])
-    .then((answer) => {
+  await inquirer
+    .prompt(promptConfig)
+    .then(async (answer) => {
       const newAnswer = answer.position
         .match(/([A-Za-z]+)/gm)
         .map((word: string) => word.toUpperCase()) as string[];
 
-      const positions: number[] = [];
-      let direction: string = "";
-
-      if (
-        newAnswer.includes("PLACE") &&
-        initialDirections.includes(newAnswer[1])
-      ) {
-        answer.position.toUpperCase();
-
-        direction = newAnswer[1];
-
-        const a = Array.from(answer.position);
-
-        console.log(a);
-        a.forEach((pos: any) => {
-          console.log(pos);
-          if (["0", "1", "2", "3", "4"].includes(pos)) {
-            positions.push(Number(pos));
-          }
-        });
-
-        positionX = positions[0];
-        positionY = positions[1];
+      if (!newAnswer.includes(allowedCommands.PLACE)) {
+        throw new InvalidCommandError();
       }
 
-      return { position: [positionX, positionY], direction };
-    });
+      const { initialDirection, position } =
+        placeRobotCliServce.cliPlaceRobot(answer);
 
-  console.log(result);
+      const { direction, currentPlace, currentPosition } =
+        placeRobotCliServce.movimentCliRobot({
+          initialDirection,
+          position,
+          moviment: answer.moviment.toUpperCase()
+        });
+
+      async function moveCLI({
+        initialDirection,
+        position,
+        moviment
+      }: IanswerDto): Promise<any> {
+        let result: any;
+        inquirer
+          .prompt([promptConfig[1]])
+          .then((answer) => {
+            result = placeRobotCliServce.movimentCliRobot({
+              initialDirection,
+              position,
+              moviment
+            });
+          })
+          .catch((error) => console.error(error));
+
+        if (result.currentPosition === "") {
+          await moveCLI({
+            initialDirection: result.currentPosition,
+            moviment: result.direction,
+            position: result.position
+          });
+        }
+
+        return result;
+      }
+
+      if (isEmpty(currentPlace)) {
+        await moveCLI({
+          initialDirection: currentPosition,
+          moviment: direction,
+          position: position
+        });
+      }
+    })
+    .catch((error) => console.error(error));
 }
+//     .then(({ initialDirection, position, moviment }: IanswerDto) => {
+//       const { direction, currentPlace, currentPosition } =
+//         placeRobotCliServce.movimentCliRobot({
+//           initialDirection,
+//           position,
+//           moviment
+//         });
 
-export const directions = {
-  NORTH: "NORTH",
-  SOUTH: "SOUTH",
-  EAST: "EAST",
-  WEST: "WEST"
-};
-
-export const initialDirections = ["NORTH", "SOUTH", "EAST", "WEST"];
+//       if (currentPosition === "") {
+//         inquirer.prompt([promptConfig[1]]).then((answer) => {
+//           placeRobotCliServce.movimentCliRobot({
+//             initialDirection,
+//             position,
+//             moviment
+//           });
+//         });
+//       }
+//     })
+//     .catch((error) => console.error(error.message));
+// }
 
 initialCLI();
+
+// async function moveCLI({
+//   initialDirection,
+//   position,
+//   moviment
+// }: IanswerDto): Promise<any> {
+//   let result;
+//   inquirer.prompt([promptConfig[1]]).then((answer) => {
+//     result = placeRobotCliServce.movimentCliRobot({
+//       initialDirection,
+//       position,
+//       moviment
+//     });
+//   });
+
+//   return result;
+// }
