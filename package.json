@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig-build.json",
-    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test": "jest --config ./jest.config.js --detectOpenHandles --forceExit",
     "test:watch": "yarn test -- --watch",
     "test:coverage": "yarn test -- --coverage",
     "cli": "nodemon ./src/services/CLI/inquirer.cli.ts",
