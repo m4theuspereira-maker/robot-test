@@ -53,13 +53,13 @@ export class PlaceRobotCliServcie {
     }
   }
 
-  movimentCliRobot(answer: IanswerDto): any {
+  movimentCliRobot({ initialDirection, position, moviment }: IanswerDto): any {
     try {
-      let direction = answer.initialDirection;
+      let direction = initialDirection;
       let currentPlace = "";
-      let currentPosition = answer.position;
+      let currentPosition = position;
 
-      switch (answer.moviment) {
+      switch (moviment) {
         case allowedCommands.RIGHT:
           direction = this.tableService.turnRobotToRight(direction);
           break;
@@ -82,6 +82,13 @@ export class PlaceRobotCliServcie {
         default:
           break;
       }
+
+      return {
+        anteriorDirection: initialDirection,
+        direction,
+        currentPlace,
+        currentPosition
+      };
     } catch (error) {
       return handlerCLIException(error);
     }
