@@ -1,4 +1,3 @@
-import { after } from "lodash";
 import supertest from "supertest";
 import { server } from "../../src/index";
 
