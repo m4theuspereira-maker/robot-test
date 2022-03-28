@@ -1,14 +1,8 @@
 import inquirer from "inquirer";
 import { isEmpty } from "lodash";
+import { placeRobotCliServiceFactiory } from "../../config/placeRobotCliService.factories";
 import { InvalidCommandError } from "../../domain/cli/cli.erros";
-import { allowedCommands, Robot } from "../../domain/robot/robot";
-import { Table } from "../../domain/table/table";
-import { TableService } from "../table-service/table.service";
-import { PlaceRobotCliServcie } from "./place-robot.cli.servide";
-
-const table = new Table();
-const robot = new Robot();
-const tableService = new TableService(table, robot);
+import { allowedCommands } from "../../domain/robot/robot";
 
 export interface IanswerDto {
   initialDirection: string;
@@ -31,11 +25,7 @@ export const promptConfig = [
   }
 ];
 
-const placeRobotCliServce = new PlaceRobotCliServcie(
-  table,
-  robot,
-  tableService
-);
+const placeRobotCliServce = placeRobotCliServiceFactiory();
 async function initialCLI(): Promise<any> {
   await inquirer
     .prompt(promptConfig)
