@@ -4,11 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "cli": "ts-node src/services/CLI/inquirer.cli.ts",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "test": "jest --config ./jest.config.js --detectOpenHandles --forceExit",
     "test:watch": "yarn test -- --watch",
     "test:coverage": "yarn test -- --coverage",
-    "cli": "nodemon ./src/services/CLI/inquirer.cli.ts",
     "dev": "nodemon src/index.ts"
   },
   "dependencies": {
