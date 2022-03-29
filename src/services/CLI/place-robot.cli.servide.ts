@@ -8,7 +8,7 @@ import {
 import { DirectionError } from "../../domain/robot/robotErros";
 import { allowedPositions, Table } from "../../domain/table/table";
 import { TableService } from "../table-service/table.service";
-import { IanswerDto } from "./inquirer.cli";
+import { IanswerDto } from "./inquirercli.functions";
 
 export class PlaceRobotCliServcie {
   constructor(
@@ -59,7 +59,7 @@ export class PlaceRobotCliServcie {
       let currentPlace = "";
       let currentPosition = position;
 
-      switch (moviment) {
+      switch (moviment.toUpperCase()) {
         case allowedCommands.RIGHT:
           direction = this.tableService.turnRobotToRight(direction);
           break;
@@ -87,10 +87,11 @@ export class PlaceRobotCliServcie {
         anteriorDirection: initialDirection,
         direction,
         currentPlace,
-        currentPosition
+        currentPosition,
+        moviment
       };
     } catch (error) {
-      return handlerCLIException(error);
+      handlerCLIException(error);
     }
   }
 }
