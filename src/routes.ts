@@ -6,7 +6,7 @@ const tableController = tableControllerFactory();
 const routes = Router();
 
 routes.use(express.json());
-routes.use(express.urlencoded());
+routes.use(express.urlencoded({ extended: true }));
 
 routes.post("/table/place-robot", tableController.placeRobot);
 routes.post("/table/move-robot", tableController.moveRobot);
