@@ -1,3 +1,4 @@
-export function handlerCLIException(ex: any): any {
-  return console.error(ex.message);
+export function handlerCLIException(ex: any): boolean {
+  console.error(ex.message);
+  return false;
 }
