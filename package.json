@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "cli": "ts-node src/services/CLI/inquirer.cli.ts",
+    "cli": "ts-node src/services/CLI/init.inquirer.cli.ts",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "test": "jest --config ./jest.config.js --detectOpenHandles --forceExit",
     "test:watch": "yarn test -- --watch",
