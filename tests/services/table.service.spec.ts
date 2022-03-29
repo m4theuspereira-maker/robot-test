@@ -18,7 +18,7 @@ describe("test table service", () => {
   it("should placeRobot in a valid table place", () => {
     const table = tableService.placeRobotInTable("south", [0, 2]);
 
-    expect(table).toEqual({ initialDirection: "south", position: [0, 2] });
+    expect(table).toEqual({ initialDirection: "SOUTH", position: [0, 2] });
   });
 
   it("should throw if invalid place in talbe", () => {

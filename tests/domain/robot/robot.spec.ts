@@ -1,7 +1,7 @@
 import { Robot } from "../../../src/domain/robot/robot";
 import {
   DirectionError,
-  PositionError,
+  PositionError
 } from "../../../src/domain/robot/robotErros";
 
 describe("robot", () => {
@@ -26,8 +26,8 @@ describe("robot", () => {
     const robotPosition = robot.placeRobot("north", [0, 0]);
 
     expect(robotPosition).toEqual({
-      initialDirection: "north",
-      position: [0, 0],
+      initialDirection: "NORTH",
+      position: [0, 0]
     });
   });
 });

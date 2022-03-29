@@ -46,7 +46,7 @@ export class Robot {
     }
 
     return {
-      initialDirection,
+      initialDirection: initialDirection.toUpperCase(),
       position
     };
   }
