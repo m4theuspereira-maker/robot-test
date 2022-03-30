@@ -2,7 +2,7 @@ import express from "express";
 import { routes } from "./routes";
 import cors from "cors";
 import "../src/config/dotenv.config";
-import { PORT } from "./config/envoiriment.consts";
+import { PORT } from "./config/environment.consts";
 
 const app = express();
 app.use(cors());
