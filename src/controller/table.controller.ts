@@ -1,6 +1,6 @@
 import { TableService } from "../services/table-service/table.service";
 import { Request, Response } from "express";
-import { serverError } from "../infrastructure/server.errors";
+import { responseError } from "../infrastructure/server.errors";
 
 export class TableController {
   constructor(private readonly tableService: TableService) {}
@@ -15,7 +15,7 @@ export class TableController {
 
       return res.json(robotPosition);
     } catch (error) {
-      throw serverError(res, error);
+      throw responseError(res, error);
     }
   };
 
@@ -27,7 +27,7 @@ export class TableController {
 
       return res.json({ robotMoved });
     } catch (error) {
-      throw serverError(res, error);
+      throw responseError(res, error);
     }
   };
 
@@ -39,7 +39,7 @@ export class TableController {
 
       return res.json({ robotTurned });
     } catch (error) {
-      throw serverError(res, error);
+      throw responseError(res, error);
     }
   };
 
@@ -51,7 +51,7 @@ export class TableController {
 
       return res.json({ robotTurned });
     } catch (error) {
-      throw serverError(res, error);
+      throw responseError(res, error);
     }
   };
 }
