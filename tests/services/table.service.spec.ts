@@ -1,5 +1,3 @@
-import { Robot } from "../../src/domain/robot/robot";
-import { Table } from "../../src/domain/table/table";
 import { ForeignPositionError } from "../../src/domain/table/tableErros";
 import { DirectionError } from "../../src/domain/robot/robotErros";
 import { TableService } from "../../src/services/table-service/table.service";
