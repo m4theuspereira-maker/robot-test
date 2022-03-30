@@ -1,7 +1,7 @@
 import { ForeignPositionError } from "../../src/domain/table/tableErros";
 import { DirectionError } from "../../src/domain/robot/robotErros";
 import { TableService } from "../../src/services/table-service/table.service";
-import { tableServiceFactory } from "../../src/config/table.factories";
+import { tableServiceFactory } from "../../src/factories/table.factories";
 
 describe("table service", () => {
   let tableService: TableService;

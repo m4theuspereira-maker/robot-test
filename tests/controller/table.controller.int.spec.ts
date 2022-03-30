@@ -23,7 +23,7 @@ describe("table controller", () => {
 
   it(`
     should return a server error if invalid direction was provided, 
-    status: 200
+    status: 400
     route:/table/place-robot`, async () => {
     const response = await supertest(server)
       .post("/table/place-robot")
@@ -31,7 +31,7 @@ describe("table controller", () => {
 
     expect(response).toEqual(
       expect.objectContaining({
-        status: 200,
+        status: 400,
         body: { body: "A foreign position was selected" }
       })
     );
@@ -55,7 +55,7 @@ describe("table controller", () => {
 
   it(`
     should return a serve error if robot was moved to position out of table, 
-    status: 200
+    status: 400
     route:/table/move-robot`, async () => {
     const response = await supertest(server)
       .post("/table/move-robot")
@@ -63,7 +63,7 @@ describe("table controller", () => {
 
     expect(response).toEqual(
       expect.objectContaining({
-        status: 200,
+        status: 400,
         body: { body: "A foreign position was selected" }
       })
     );
@@ -86,7 +86,7 @@ describe("table controller", () => {
   });
 
   it(`should return a server error if invalid direction as provided
-  status: 200
+  status: 400
   route: /table/turn-right  
 `, async () => {
     const response = await supertest(server)
@@ -95,7 +95,7 @@ describe("table controller", () => {
 
     expect(response).toEqual(
       expect.objectContaining({
-        status: 200,
+        status: 400,
         body: { body: "Invalid Direction" }
       })
     );
@@ -118,7 +118,7 @@ describe("table controller", () => {
   });
 
   it(`should return a server error if invalid direction as provided
-  status: 200
+  status: 400
   route: /table/turn-left  
 `, async () => {
     const response = await supertest(server)
@@ -127,7 +127,7 @@ describe("table controller", () => {
 
     expect(response).toEqual(
       expect.objectContaining({
-        status: 200,
+        status: 400,
         body: { body: "Invalid Direction" }
       })
     );
