@@ -46,18 +46,22 @@ export async function moveCLI({
   position,
   moviment
 }: IanswerDto): Promise<any> {
-  let result;
-  result = await inquirer.prompt([promptConfig[1]]);
+  try {
+    let result;
+    result = await inquirer.prompt([promptConfig[1]]);
 
-  result = placeRobotCliServce.movimentCliRobot({
-    initialDirection,
-    position,
-    moviment: result.moviment
-  });
+    result = placeRobotCliServce.movimentCliRobot({
+      initialDirection,
+      position,
+      moviment: result.moviment
+    });
 
-  if (isUndefined(result)) {
-    return { initialDirection, position, moviment };
+    if (isUndefined(result)) {
+      return { initialDirection, position, moviment };
+    }
+
+    return result;
+  } catch (error) {
+    throw new InvalidCommandError();
   }
-
-  return result;
 }
