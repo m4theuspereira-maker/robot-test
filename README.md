@@ -1,6 +1,47 @@
+## Description
+This project simulates a robot above a table and can be used by CLI and by an interface. The propose is resolve the pinpeople's technical test. To get more informations about the test: https://github.com/pin-people/toy_robot#readme
 
+## Clone
+```bash
+$ git clone https://github.com/m4theuspereira-maker/robot-test.git
 ```
-pinpeople-test
+## Enter in project folder
+```bash
+$ mkdir robot-test.git
+$ .env
+```
+## Add address port in .env file
+example: 
+```bash
+  PORT=8080
+```
+## Instalation
+
+```bash
+$ yarn
+```
+
+## Running the app
+```bash
+#development
+$ yarn dev
+
+#prod
+$yarn start
+```
+
+## Running tests
+```bash
+yarn test
+```
+
+## Running CLI
+```bash
+$ yarn cli
+```
+
+## Project organization
+```
 ├─ .eslintignore
 ├─ .eslintrc.json
 ├─ .gitignore
