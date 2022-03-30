@@ -1,3 +1,40 @@
+## Description
+This project simulates a robot above a table and can be used by CLI and by an interface 
+
+## Instalation
+
+```bash
+$ yarn
+```
+
+## Running the app
+```bash
+#development
+$ yarn dev
+
+#prod
+$yarn start
+```
+
+## Running tests
+```bash
+yarn test
+```
+
+## Running CLI
+```bash
+$ yarn cli
+```
+
+## CLI usage
+
+### Command examples
+ ```
+ PLACE 0,0,SOUTH
+ MOVE
+ LEFT
+ RIGHT
+ ```
 
 ```
 pinpeople-test
