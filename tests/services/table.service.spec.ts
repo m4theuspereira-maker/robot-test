@@ -68,7 +68,7 @@ describe("test table service", () => {
   });
 
   it("should throw an error if moved to an invalid position towards east", () => {
-    expect(() => tableService.moveRobot([4, 0], "east")).toThrowError(
+    expect(() => tableService.moveRobot([0, 4], "east")).toThrowError(
       new ForeignPositionError()
     );
   });
@@ -81,24 +81,24 @@ describe("test table service", () => {
   it("should return a valid position of moved to south", () => {
     const validPosition = tableService.moveRobot([0, 0], "south");
 
-    expect(validPosition).toEqual([0, 1]);
+    expect(validPosition).toEqual([1, 0]);
   });
 
   it("should return a valid position of moved to east", () => {
     const validPosition = tableService.moveRobot([0, 0], "east");
 
-    expect(validPosition).toEqual([1, 0]);
+    expect(validPosition).toEqual([0, 1]);
   });
 
   it("should return a valid position of moved to west", () => {
-    const validPosition = tableService.moveRobot([1, 0], "west");
-
-    expect(validPosition).toEqual([0, 0]);
+    expect(() => tableService.moveRobot([1, 0], "west")).toThrowError(
+      new ForeignPositionError()
+    );
   });
 
   it("should return a valid position of moved to north", () => {
     const validPosition = tableService.moveRobot([1, 1], "north");
 
-    expect(validPosition).toEqual([1, 0]);
+    expect(validPosition).toEqual([0, 1]);
   });
 });
