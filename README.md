@@ -1,7 +1,9 @@
+
 ```
 pinpeople-test
 ├─ .eslintignore
 ├─ .eslintrc.json
+├─ .gitignore
 ├─ .prettierrc.json
 ├─ .vscode
 │  └─ launch.json
