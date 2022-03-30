@@ -1,5 +1,5 @@
 ## Description
-This project simulates a robot above a table and can be used by CLI and by an interface 
+This project simulates a robot above a table and can be used by CLI and by an interface. The propose is resolve the pinpeople's technical test. To get more informations about the test: https://github.com/pin-people/toy_robot#readme
 
 ## Instalation
 
@@ -26,18 +26,8 @@ yarn test
 $ yarn cli
 ```
 
-## CLI usage
-
-### Command examples
- ```
- PLACE 0,0,SOUTH
- MOVE
- LEFT
- RIGHT
- ```
-
+## Project organization
 ```
-pinpeople-test
 ├─ .eslintignore
 ├─ .eslintrc.json
 ├─ .gitignore
