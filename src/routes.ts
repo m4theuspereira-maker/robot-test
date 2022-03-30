@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { tableControllerFactory } from "./config/table.factories";
+import { tableControllerFactory } from "./factories/table.factories";
 
 const tableController = tableControllerFactory();
 
