@@ -3,16 +3,13 @@ import { Table } from "../../src/domain/table/table";
 import { ForeignPositionError } from "../../src/domain/table/tableErros";
 import { DirectionError } from "../../src/domain/robot/robotErros";
 import { TableService } from "../../src/services/table-service/table.service";
-import { isElementAccessExpression } from "typescript";
+import { tableServiceFactory } from "../../src/config/table.factories";
 
 describe("table service", () => {
-  const table = new Table();
-  const robot = new Robot();
-
   let tableService: TableService;
 
   beforeEach(() => {
-    tableService = new TableService(table, robot);
+    tableService = tableServiceFactory();
   });
 
   it("should placeRobot in a valid table place", () => {
