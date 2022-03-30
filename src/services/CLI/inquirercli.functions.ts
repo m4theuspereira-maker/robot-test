@@ -1,8 +1,8 @@
 import inquirer from "inquirer";
 import { isUndefined } from "lodash";
-import { placeRobotCliServiceFactiory } from "../../config/placeRobotCliService.factories";
 import { InvalidCommandError } from "../../domain/cli/cli.erros";
 import { allowedCommands } from "../../domain/robot/robot";
+import { placeRobotCliServiceFactiory } from "../../factories/placeRobotCliService.factories";
 import { promptConfig } from "./constants";
 
 export interface IanswerDto {
