@@ -1,7 +1,7 @@
 import { Table } from "../../../src/domain/table/table";
 import { ForeignPositionError } from "../../../src/domain/table/tableErros";
 
-describe("table test", () => {
+describe("table domain", () => {
   let table: Table;
   beforeEach(() => {
     table = new Table();

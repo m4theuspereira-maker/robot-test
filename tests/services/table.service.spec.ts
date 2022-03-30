@@ -5,7 +5,7 @@ import { DirectionError } from "../../src/domain/robot/robotErros";
 import { TableService } from "../../src/services/table-service/table.service";
 import { isElementAccessExpression } from "typescript";
 
-describe("test table service", () => {
+describe("table service", () => {
   const table = new Table();
   const robot = new Robot();
 

@@ -4,7 +4,7 @@ import {
   PositionError
 } from "../../../src/domain/robot/robotErros";
 
-describe("robot", () => {
+describe("robot domain", () => {
   let robot: Robot;
   beforeEach(() => {
     robot = new Robot();
