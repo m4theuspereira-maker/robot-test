@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import { isUndefined } from "lodash";
 import { placeRobotCliServiceFactiory } from "../../config/placeRobotCliService.factories";
 import { InvalidCommandError } from "../../domain/cli/cli.erros";
 import { allowedCommands } from "../../domain/robot/robot";
@@ -11,33 +12,33 @@ export interface IanswerDto {
 }
 
 const placeRobotCliServce = placeRobotCliServiceFactiory();
+
 export async function initialCLI(): Promise<any> {
-  let movimentResult;
-  movimentResult = await inquirer
-    .prompt(promptConfig)
-    .then(async (answer) => {
-      const newAnswer = answer.position
-        .match(/([A-Za-z]+)/gm)
-        .map((word: string) => word.toUpperCase()) as string[];
+  try {
+    let movimentResult: any;
+    movimentResult = await inquirer.prompt(promptConfig);
 
-      if (!newAnswer.includes(allowedCommands.PLACE)) {
-        throw new InvalidCommandError();
-      }
+    const newAnswer = movimentResult.position
+      .match(/([A-Za-z]+)/gm)
+      .map((word: string) => word.toUpperCase()) as string[];
 
-      const { initialDirection, position } =
-        placeRobotCliServce.cliPlaceRobot(answer);
+    if (!newAnswer.includes(allowedCommands.PLACE)) {
+      throw new InvalidCommandError();
+    }
 
-      movimentResult = placeRobotCliServce.movimentCliRobot({
-        initialDirection,
-        position,
-        moviment: answer.moviment.toUpperCase()
-      });
+    const { initialDirection, position } =
+      placeRobotCliServce.cliPlaceRobot(movimentResult);
 
-      return movimentResult;
-    })
-    .catch((error) => console.error(error));
+    movimentResult = placeRobotCliServce.movimentCliRobot({
+      initialDirection,
+      position,
+      moviment: movimentResult.moviment.toUpperCase()
+    });
 
-  return movimentResult;
+    return movimentResult;
+  } catch (error) {
+    throw new InvalidCommandError();
+  }
 }
 
 export async function moveCLI({
@@ -46,24 +47,17 @@ export async function moveCLI({
   moviment
 }: IanswerDto): Promise<any> {
   let result;
-  result = await inquirer
-    .prompt([promptConfig[1]])
-    .then((answer) => {
-      result = placeRobotCliServce.movimentCliRobot({
-        initialDirection,
-        position,
-        moviment: answer.moviment
-      });
+  result = await inquirer.prompt([promptConfig[1]]);
 
-      if (result === false) {
-        return { initialDirection, position, moviment };
-      }
+  result = placeRobotCliServce.movimentCliRobot({
+    initialDirection,
+    position,
+    moviment: result.moviment
+  });
 
-      return result;
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
+  if (isUndefined(result)) {
+    return { initialDirection, position, moviment };
+  }
 
   return result;
 }
